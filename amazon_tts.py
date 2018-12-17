@@ -10,6 +10,17 @@ from time import sleep
 import xlrd 
 from xlrd.sheet import ctype_text 
 from os.path import join, dirname, abspath
+import re
+
+def urlify(s):
+
+    # Remove all non-word characters (everything except numbers and letters)
+    s = re.sub(r"[^\w\s]", '', s)
+
+    # Replace all runs of whitespace with a single dash
+    s = re.sub(r"\s+", '-', s)
+
+    return s
 
 # Create a client using the credentials and region defined in the [adminuser]
 # section of the AWS credentials file (~/.aws/credentials).
@@ -41,6 +52,8 @@ xl_workbook = xlrd.open_workbook(fname)
 xl_sheet = xl_workbook.sheet_by_index(0)
 numOfRows = xl_sheet.nrows - 1
 for rows in range(0, numOfRows):
+    filename = xl_sheet.cell_value(rows, 0)
+    filename = urlify(filename)
     for accent in language:
         try:
             # Request speech synthesis
@@ -57,8 +70,8 @@ for rows in range(0, numOfRows):
         # at the end of the with statement's scope.
             with closing(response["AudioStream"]) as stream:
                 #output = os.path.join(gettempdir(), "speech.mp3")
-                filename = "name" + ".mp3"
-                output = os.path.join(gettempdir(), filename)
+                save_to = filename + "_" + accent + ".mp3"
+                output = os.path.join(gettempdir(), save_to)
 	        print("File path", output)
                 try:
                 # Open a file for writing the output as a binary stream
