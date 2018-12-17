@@ -11,6 +11,26 @@ from tempfile import gettempdir
 session = Session(profile_name="amzonPollyDev")
 polly = session.client("polly")
 response = polly.describe_voices()
+
+#Adding Language list for diff accent in English supported by Amazon Polly
+language = ['Geraint', # Welsh English - Male
+            'Salli', # US English -  Female
+            'Matthew', #US English -  Male
+            'Kimberly', #US English -  Female
+            'Kendra', #US English -  Female
+            'Justin', #US English -  Male
+            'Joey', #US English -  Male        
+            'Joanna', #US English -  Female  
+            'Ivy', #US English -  Female       
+            'Raveena', #Indian English -  Female         
+            'Aditi', #Indian English -  Female         
+            'Emma', #British English -Female         
+            'Brian',  #British English - Male  
+            'Amy', #British English - Female       
+            'Russell', #UAustralian English - Male                   
+            'Nicole' #UAustralian English - Female               
+]
+
 try:
     # Request speech synthesis
     response = polly.synthesize_speech(Text="Parking availble in this floor!", OutputFormat="mp3", VoiceId="Vitoria")
