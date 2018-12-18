@@ -11,6 +11,7 @@ import xlrd
 from xlrd.sheet import ctype_text 
 from os.path import join, dirname, abspath
 import re
+from os.path import expanduser
 
 def urlify(s):
 
@@ -54,6 +55,12 @@ numOfRows = xl_sheet.nrows - 1
 for rows in range(0, numOfRows):
     filename = xl_sheet.cell_value(rows, 0)
     filename = urlify(filename)
+    home = expanduser("~")
+    desPath = home +  "/" + filename
+    print desPath
+    if not os.path.exists(desPath):
+        os.makedirs(desPath)
+
     for accent in language:
         try:
             # Request speech synthesis
@@ -70,8 +77,8 @@ for rows in range(0, numOfRows):
         # at the end of the with statement's scope.
             with closing(response["AudioStream"]) as stream:
                 #output = os.path.join(gettempdir(), "speech.mp3")
-                save_to = filename + "_" + accent + ".mp3"
-                output = os.path.join(gettempdir(), save_to)
+                save_to = accent + ".mp3"
+                output = os.path.join(desPath, save_to)
 	        print("File path", output)
                 try:
                 # Open a file for writing the output as a binary stream
