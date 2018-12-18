@@ -1,3 +1,7 @@
+#
+#Copyright (C) 2017 by Yichun Zhang, OpenResty Inc.
+#
+
 #!/usr/bin/env perl
 
 use v5.10.1;
