@@ -56,7 +56,6 @@ language = ['Geraint', # Welsh English - Male
 ]
 infile = args.input
 index = 1
-
 home = expanduser("~")
 desPath = home 
 
@@ -85,7 +84,9 @@ for accent in language:
         # at the end of the with statement's scope.
             with closing(response["AudioStream"]) as stream:
                 #output = os.path.join(gettempdir(), "speech.mp3")
-                save_to = accent + ".mp3"
+
+                filename = os.environ['FILENAME']
+                save_to = filename + accent + ".mp3"
                 output = os.path.join(desPath, save_to)
 	        print("File path", output)
                 try:
