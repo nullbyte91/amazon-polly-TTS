@@ -12,6 +12,8 @@ from xlrd.sheet import ctype_text
 from os.path import join, dirname, abspath
 import re
 from os.path import expanduser
+import argparse
+
 
 def urlify(s):
 
@@ -22,6 +24,11 @@ def urlify(s):
     s = re.sub(r"\s+", '-', s)
 
     return s
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('input', metavar='ssml File', type=str,
+                    help='the SSML input file')
+args = parser.parse_args()
 
 # Create a client using the credentials and region defined in the [adminuser]
 # section of the AWS credentials file (~/.aws/credentials).
@@ -47,24 +54,25 @@ language = ['Geraint', # Welsh English - Male
             'Russell',  # UAustralian English - Male
             'Nicole' #UAustralian English - Female               
 ]
-fname = join(dirname(dirname(abspath(__file__))), 'amazon_polly', 'textDataset.xlsx')
-print(fname)
-xl_workbook = xlrd.open_workbook(fname)
-xl_sheet = xl_workbook.sheet_by_index(0)
-numOfRows = xl_sheet.nrows - 1
-for rows in range(0, numOfRows):
-    filename = xl_sheet.cell_value(rows, 0)
-    filename = urlify(filename)
-    home = expanduser("~")
-    desPath = home +  "/" + filename
-    print desPath
-    if not os.path.exists(desPath):
-        os.makedirs(desPath)
+infile = args.input
+index = 1
 
-    for accent in language:
+home = expanduser("~")
+desPath = home 
+
+pieces = []
+with open(infile, "rb") as f:
+    pieces = [l for l in (line.strip() for line in f) if l]
+
+for accent in language:
+    i = index
+    for piece in pieces:
+        print "piece %d: %s" % (i, piece)
+
         try:
             # Request speech synthesis
-            response = polly.synthesize_speech(Text=xl_sheet.cell_value(rows, 0), OutputFormat="mp3", VoiceId=accent)
+            response = polly.synthesize_speech(Text=piece, TextType="ssml", OutputFormat="mp3",
+            VoiceId=accent)
         except (BotoCoreError, ClientError) as error:
             # The service returned an error, exit gracefully
             print(error)
