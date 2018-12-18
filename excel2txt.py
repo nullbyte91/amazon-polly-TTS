@@ -8,10 +8,10 @@ import re
 from os.path import expanduser
 
 
-# parser = argparse.ArgumentParser(description='Process some integers.')
-# parser.add_argument('input', metavar='Excel File', type=str,
-#                     help='the Excel input file')
-# args = parser.parse_args()
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('input', metavar='Excel File', type=str,
+                     help='the Excel input file')
+args = parser.parse_args()
 
 def urlify(s):
 
@@ -23,7 +23,9 @@ def urlify(s):
 
     return s
 
-fname = join(dirname(dirname(abspath(__file__))), 'amazon-polly-TTS', 'textDataset.xlsx')
+fname = args.input
+print fname
+#fname = join(dirname(dirname(abspath(__file__))), 'amazon_polly', 'textDataset.xlsx')
 xl_workbook = xlrd.open_workbook(fname)
 xl_sheet = xl_workbook.sheet_by_index(0)
 numOfRows = xl_sheet.nrows - 1
