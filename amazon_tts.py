@@ -109,4 +109,4 @@ for accent in language:
             # the following works on Mac and Linux. (Darwin = mac, xdg-open = linux).
             opener = "open" if sys.platform == "darwin" else "xdg-open"
             subprocess.call([opener, output])
-            sleep(2)
+            sleep(3)
