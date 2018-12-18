@@ -24,7 +24,6 @@ def urlify(s):
     return s
 
 fname = args.input
-print fname
 #fname = join(dirname(dirname(abspath(__file__))), 'amazon_polly', 'textDataset.xlsx')
 xl_workbook = xlrd.open_workbook(fname)
 xl_sheet = xl_workbook.sheet_by_index(0)
@@ -39,7 +38,6 @@ for rows in range(0, numOfRows):
     filename  = urlify(txt) + ".txt"
     desPath = folderPath + "/" + filename
     with open(desPath, 'w+') as my_file:
-        print xl_sheet.cell_value(rows, 0)
         my_file.write(xl_sheet.cell_value(rows, 0))
 
 exit(folderPath) 
