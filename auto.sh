@@ -10,6 +10,6 @@ do
      filename=$(basename -- $entry)
      var=${filename%%.*}
      export FILENAME=$DownloadDir$var
-     ./txt2ssml.pl -s slow $entry > $var
-     python amazon_tts.py $var
+     ./txt2ssml.pl -s slow $entry > $va$var
+     python amazon_tts.py $va$var
  done                                                                                            
