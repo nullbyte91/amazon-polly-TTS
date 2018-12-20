@@ -6,7 +6,10 @@ from xlrd.sheet import ctype_text
 from os.path import join, dirname, abspath
 import re
 from os.path import expanduser
+import sys
 
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('input', metavar='Excel File', type=str,
