@@ -13,7 +13,7 @@ can provide the input as plain text or in Speech Synthesis Markup Language (SSML
 you can control various aspects of speech such as pronunciation, volume, pitch, and speech rate. For
 more information, see Generating Speech from SSML Documents (p. 30).
  
-• <b>ilable voices – Amazon Polly provides a portfolio of multiple languages and a variety of voices,
+• <b>ilable voices</b> – Amazon Polly provides a portfolio of multiple languages and a variety of voices,
 including a bilingual voice (for both English and Hindi). For most languages you can select from several
 different voices, both male and female. You specify the voice ID name when launching the speech
 synthesis task, and then the service uses this voice to convert the text to speech. Amazon Polly is
@@ -21,6 +21,12 @@ not a translation service—the synthesized speech is in the language of the tex
 using digits (for example, 53, not fifty-three) are synthesized in the language of the voice. For more
 information, see Voices in Amazon Polly.
  
-• <b>Output format – Amazon Polly can deliver the synthesized speech in multiple formats. You can select
+• <b>Output format</b> – Amazon Polly can deliver the synthesized speech in multiple formats. You can select
 the audio format that suits your needs. For example, you might request the speech in the MP3 or Ogg
 Vorbis format to consume in web and mobile application
+
+## Installing prerequisites for Application:
+```bash
+cd amazon-polly-TTS
+pip install -r requirements.txt --user
+```
