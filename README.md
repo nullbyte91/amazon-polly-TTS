@@ -28,5 +28,5 @@ Vorbis format to consume in web and mobile application
 ## Installing prerequisites for Application:
 ```bash
 cd amazon-polly-TTS
-pip install -r requirements.txt --user
+basic_setup.sh
 ```
